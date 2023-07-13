@@ -29,11 +29,13 @@ namespace PdfViewerWebService
             Console.WriteLine("PdfViewerController initialized");
         }
 
+
         [HttpPost("Load")]
         [Microsoft.AspNetCore.Cors.EnableCors("MyPolicy")]
         [Route("[controller]/Load")]
-        //Post action for Loading the PDF documents   
-        public async Task<IActionResult> LoadAsync([FromBody] Dictionary<string, string> jsonObject)
+        //Post action for Loading the PDF documents   
+
+        public async Task<IActionResult> Load([FromBody] Dictionary<string, string> jsonObject)
         {
             Console.WriteLine("Load called");
             // Initialize the PDF viewer object with memory cache object
@@ -259,6 +261,7 @@ namespace PdfViewerWebService
                 };
                 var response = s3Client.PutObjectAsync(request).Result;
             }
+
             return Content(documentBase);
         }
 
