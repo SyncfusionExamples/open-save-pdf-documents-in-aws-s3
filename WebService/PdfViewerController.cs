@@ -9,11 +9,8 @@ using System.IO;
 using System.Net;
 using Amazon;
 using Amazon.S3;
-using Amazon.Runtime;
 using SkiaSharp;
 using Amazon.S3.Model;
-using Microsoft.Extensions.Configuration;
-
 
 namespace PdfViewerWebService
 {
@@ -66,11 +63,8 @@ namespace PdfViewerWebService
                     // Specify the document name or retrieve it from a different source
                     var response = await s3Client.GetObjectAsync(_bucketName, document);
                     Stream responseStream = response.ResponseStream;
-                    MemoryStream memStream = new MemoryStream();
-                    responseStream.CopyTo(memStream);
-                    memStream.Seek(0, SeekOrigin.Begin);
-                    byte[] bytes = memStream.ToArray();
-                    stream = new MemoryStream(bytes);
+                    responseStream.CopyTo(stream);
+                    stream.Seek(0, SeekOrigin.Begin);
                 }
                 else
                 {
@@ -78,7 +72,6 @@ namespace PdfViewerWebService
                     stream = new MemoryStream(bytes);
                 }
             }
-
             jsonResult = pdfviewer.Load(stream, jsonObject);
             return Content(JsonConvert.SerializeObject(jsonResult));
         }
