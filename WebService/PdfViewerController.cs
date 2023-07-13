@@ -261,7 +261,7 @@ namespace PdfViewerWebService
                 var request = new PutObjectRequest
                 {
                     BucketName = bucketName,
-                    Key = result + "_download.pdf",
+                    Key = result + "_downloaded.pdf",
                     InputStream = stream,
                 };
                 var response = s3Client.PutObjectAsync(request).Result;
