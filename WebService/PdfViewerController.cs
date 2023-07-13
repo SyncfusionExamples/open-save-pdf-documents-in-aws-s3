@@ -12,6 +12,8 @@ using Amazon.S3;
 using Amazon.Runtime;
 using SkiaSharp;
 using Amazon.S3.Model;
+using Microsoft.Extensions.Configuration;
+
 
 namespace PdfViewerWebService
 {
@@ -20,13 +22,23 @@ namespace PdfViewerWebService
     public class PdfViewerController : ControllerBase
     {
         private IWebHostEnvironment _hostingEnvironment;
+        private IConfiguration _configuration;
+        public readonly string _accessKey;
+        public readonly string _secretKey;
+        public readonly string _bucketName;
+
         //Initialize the memory cache object   
         public IMemoryCache _cache;
-        public PdfViewerController(IWebHostEnvironment hostingEnvironment, IMemoryCache cache)
+        public PdfViewerController(IWebHostEnvironment hostingEnvironment, IMemoryCache cache, IConfiguration configuration)
         {
             _hostingEnvironment = hostingEnvironment;
             _cache = cache;
             Console.WriteLine("PdfViewerController initialized");
+            _configuration = configuration;
+            _accessKey = _configuration.GetValue<string>("AccessKey");
+            _secretKey = _configuration.GetValue<string>("SecretKey");
+            _bucketName = _configuration.GetValue<string>("BucketName");
+
         }
 
 
@@ -49,10 +61,10 @@ namespace PdfViewerWebService
                 {
                     RegionEndpoint bucketRegion = RegionEndpoint.USEast1;
                     // Configure the AWS SDK with your access credentials and other settings
-                    var s3Client = new AmazonS3Client("YOUR_ACCESS_KEY", "YOUR_SECRET_KEY", bucketRegion);
+                    var s3Client = new AmazonS3Client(_accessKey, _secretKey, bucketRegion);
                     string document = jsonObject["document"];
                     // Specify the document name or retrieve it from a different source
-                    var response = await s3Client.GetObjectAsync("YOUR_BUCKET_NAME", document);
+                    var response = await s3Client.GetObjectAsync(_bucketName, document);
                     Stream responseStream = response.ResponseStream;
                     MemoryStream memStream = new MemoryStream();
                     responseStream.CopyTo(memStream);
@@ -245,8 +257,8 @@ namespace PdfViewerWebService
             // Save the document to AWS S3
             RegionEndpoint bucketRegion = RegionEndpoint.USEast1;
             // Configure the AWS SDK with your access credentials and other settings
-            var s3Client = new AmazonS3Client("YOUR_ACCESS_KEY", "YOUR_SECRET_KEY", bucketRegion);
-            string bucketName = "YOUR_BUCKET_NAME";
+            var s3Client = new AmazonS3Client(_accessKey, _secretKey, bucketRegion);
+            string bucketName = _bucketName;
             string documentName = jsonObject["documentId"];
             string result = Path.GetFileNameWithoutExtension(documentName);
             byte[] bytes = Convert.FromBase64String(documentBase.Split(",")[1]);
