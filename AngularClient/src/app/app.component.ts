@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  LinkAnnotationService, BookmarkViewService, MagnificationService,
+import { LinkAnnotationService, BookmarkViewService, MagnificationService,
   ThumbnailViewService, ToolbarService, NavigationService,
-  AnnotationService, TextSearchService, TextSelectionService,
-  PrintService
-} from '@syncfusion/ej2-angular-pdfviewer';
+  TextSearchService, AnnotationService, TextSelectionService,
+  PrintService, FormDesignerService, FormFieldsService} from '@syncfusion/ej2-angular-pdfviewer';
 
 @Component({
   selector: 'app-root',
@@ -18,12 +16,12 @@ import {
                 </ejs-pdfviewer>
              </div>`,
 
-  providers: [LinkAnnotationService, BookmarkViewService, MagnificationService,
-    ThumbnailViewService, ToolbarService, NavigationService,
-    AnnotationService, TextSearchService, TextSelectionService,
-    PrintService]
-})
+  providers: [ LinkAnnotationService, BookmarkViewService, MagnificationService,ThumbnailViewService, 
+               ToolbarService, NavigationService, AnnotationService, TextSearchService,
+                TextSelectionService, PrintService, FormDesignerService, FormFieldsService]
+  })
 export class AppComponent implements OnInit {
+      // Replace the "localhost:44309" with the actual URL of your server
   public service = 'https://localhost:44396/pdfviewer';
   public document = 'PDF_Succinctly.pdf';
 
