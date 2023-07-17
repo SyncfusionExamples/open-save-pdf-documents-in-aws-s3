@@ -11,6 +11,8 @@ The provided instructions explain how to run different samples that utilize the 
 
 To run this application, you need Visual Studio 2019 or later versions.
 
+### To run the WebService sample
+
 **Step 1** Open the solution file (.sln) in Visual Studio.
 
 **Step 2** Build the solution to resolve dependencies.
