@@ -1,6 +1,5 @@
 # open-save-pdf-documents-in-aws-s3
 
-
 This repo contains the examples to open and save PDF documents in AWS S3 using the Syncfusion PDF Viewer.
 
 The provided instructions explain how to run different samples that utilize the Syncfusion PDF Viewer to open and save PDF documents stored in AWS S3. Here is a breakdown of the steps to run each sample
