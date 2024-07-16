@@ -30,8 +30,8 @@ function App() {
 
   function loadDocument() {
     const getObjectParams = {
-      Bucket: 'Update this with your bucket name', // Specify the name of your S3 bucket
-      Key: 'Update this with your key name', // Specify the key (path) of your document in the S3 bucket
+      Bucket: 'Update this with your bucket name', 
+      Key: 'Update this with your key name', 
     };
     s3.getObject(getObjectParams, (err, data) => {
       if (err) {
