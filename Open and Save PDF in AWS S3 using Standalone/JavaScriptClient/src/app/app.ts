@@ -2,9 +2,9 @@ import { PdfViewer, CustomToolbarItemModel, Toolbar, Magnification, Navigation, 
 import * as AWS from 'aws-sdk';
 
 AWS.config.update({
-  region: 'us-west-2', // Update this your region
-  accessKeyId: 'AKIASCRGFNWJIEN2KEGU', // Update this with your access key id
-  secretAccessKey: 'PteGreuiwqONGiFPpZshuTvvivGMgN5l4SLGdmj/', // Update this with your secret access key
+    region: 'update this your region',
+    accessKeyId: 'Update this with your access key id', 
+    secretAccessKey: 'Update this with your secret access key',
 });
 
 PdfViewer.Inject(Toolbar, Magnification, Navigation, Annotation, LinkAnnotation, ThumbnailView, BookmarkView, TextSelection, TextSearch, FormFields, FormDesigner);
