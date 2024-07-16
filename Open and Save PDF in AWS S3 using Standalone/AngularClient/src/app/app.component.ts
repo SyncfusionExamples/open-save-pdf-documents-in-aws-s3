@@ -7,7 +7,7 @@ import { LinkAnnotationService, BookmarkViewService,
 import * as AWS from 'aws-sdk';
 
 AWS.config.update({
-  region: 'pdate this your region',
+  region: 'update this your region',
   accessKeyId: 'Update this with your access key id', 
   secretAccessKey: 'Update this with your secret access key',
 });
