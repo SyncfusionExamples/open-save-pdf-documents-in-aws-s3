@@ -4,6 +4,86 @@
 
 <div>
     <div style="height:500px;width:100%;">
-        @Html.EJS().PdfViewer("pdfviewer").DocumentPath("https://cdn.syncfusion.com/content/pdf/pdf-succinctly.pdf").Render()
+        @Html.EJS().PdfViewer("pdfviewer").ResourceUrl("https://cdn.syncfusion.com/ej2/24.1.41/dist/ej2-pdfviewer-lib").Created("loadDocument").ToolbarClick("toolbarClick").Render()
     </div>
 </div>
+
+<script type="text/javascript">
+    AWS.config.update({
+        region: 'update this your region',
+        accessKeyId: 'Update this with your access key id',
+        secretAccessKey: 'Update this with your secret access key', 
+    });
+
+    window.onload = function () {
+        var pdfViewer = document.getElementById('pdfviewer').ej2_instances[0];
+        var toolItem1 = {
+            prefixIcon: 'e-icons e-pv-download-document-icon',
+            id: 'download_pdf',
+            tooltipText: 'Download file',
+            align: 'right'
+        };
+        pdfViewer.toolbarSettings = {
+            showTooltip: true,
+            toolbarItems: ['OpenOption', 'PageNavigationTool', 'MagnificationTool', 'PanTool', 'SelectionTool', 'SearchOption', 'PrintOption', toolItem1, 'UndoRedoTool', 'AnnotationEditTool', 'FormDesignerEditTool', 'CommentTool', 'SubmitForm']
+        };
+
+    };
+
+    // Define the toolbarClick event handler
+    function toolbarClick(args) {
+        var pdfViewer = document.getElementById('pdfviewer').ej2_instances[0];
+        if (args.item && args.item.id === 'download_pdf') {
+            saveDocument();
+        } 
+    }
+
+    function loadDocument() {
+        const s3 = new AWS.S3();
+        const getObjectParams = {
+            Bucket: 'Update this with your bucket name',
+            Key: 'Update this with your key name',
+        };
+        s3.getObject(getObjectParams, (err, data) => {
+            if (err) {
+                console.error('Error fetching document:', err);
+            } else {
+                if (data && data.Body) {
+                    const bytes = new Uint8Array(data.Body);
+                    let binary = '';
+                    bytes.forEach((byte) => (binary += String.fromCharCode(byte)));
+                    const base64String = window.btoa(binary);
+                    setTimeout(() => {
+                        var pdfViewer = document.getElementById('pdfviewer').ej2_instances[0];
+                        pdfViewer.load("data:application/pdf;base64," + base64String);
+                    }, 2000);
+                }
+            }
+        });
+    }
+
+    function saveDocument() {
+        const s3 = new AWS.S3();
+        var pdfViewer = document.getElementById('pdfviewer').ej2_instances[0];
+        pdfViewer.saveAsBlob().then(function (value) {
+            var reader = new FileReader();
+            reader.onload = () => {
+                const uint8Array = new Uint8Array(reader.result);
+                const putObjectParams = {
+                    Bucket: 'Update this with your bucket name',
+                    Key: 'Update this with your key name',
+                    Body: uint8Array,
+                    ContentType: 'application/pdf',
+                };
+                s3.putObject(putObjectParams, (err, data) => {
+                    if (err) {
+                        console.error('Error uploading document:', err);
+                    } else {
+                        console.log('Document uploaded successfully:', data);
+                    }
+                });
+            };
+            reader.readAsArrayBuffer(value);
+        });
+    }
+</script>

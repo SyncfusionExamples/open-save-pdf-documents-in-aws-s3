@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFViewerSample", "PDFViewerSample\PDFViewerSample.csproj", "{4A166AB7-B2E0-400B-9987-362B8A215F4E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFViewerSample", "PDFViewerSample\PDFViewerSample.csproj", "{1AAEBA7F-2CC4-4EA4-9332-82209DAFC5C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4A166AB7-B2E0-400B-9987-362B8A215F4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A166AB7-B2E0-400B-9987-362B8A215F4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A166AB7-B2E0-400B-9987-362B8A215F4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A166AB7-B2E0-400B-9987-362B8A215F4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AAEBA7F-2CC4-4EA4-9332-82209DAFC5C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AAEBA7F-2CC4-4EA4-9332-82209DAFC5C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AAEBA7F-2CC4-4EA4-9332-82209DAFC5C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AAEBA7F-2CC4-4EA4-9332-82209DAFC5C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4767A6F8-6804-4A35-880D-54DE40449D03}
+		SolutionGuid = {B32C7323-4521-463E-B424-98FBB427DD37}
 	EndGlobalSection
 EndGlobal
