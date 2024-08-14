@@ -20,7 +20,7 @@
     "@angular/router": "^16.0.0",
     "@aws-amplify/ui-angular": "^5.0.16",
     "@syncfusion/ej2-angular-pdfviewer": "^26.1.40",
-    "aws-amplify": "^6.3.8",
+    "aws-amplify": "^6.5.0",
     "aws-sdk": "^2.1654.0",
     "buffer": "^6.0.3",
     "process": "^0.11.10",
