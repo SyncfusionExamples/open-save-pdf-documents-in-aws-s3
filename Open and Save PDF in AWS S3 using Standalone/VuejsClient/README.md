@@ -1,4 +1,4 @@
-# opensaveaws
+# opensaveaws-s3
 
 ## Project setup
 ```
