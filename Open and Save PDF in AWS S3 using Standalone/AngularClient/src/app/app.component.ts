@@ -4,15 +4,10 @@ import { LinkAnnotationService, BookmarkViewService,
          NavigationService, TextSearchService, TextSelectionService,
          PrintService, FormDesignerService, FormFieldsService, 
          AnnotationService, PageOrganizerService, PdfViewerComponent, CustomToolbarItemModel } from '@syncfusion/ej2-angular-pdfviewer';
-import * as AWS from 'aws-sdk';
-
-AWS.config.update({
-  region: 'pdate this your region',
-  accessKeyId: 'Update this with your access key id', 
-  secretAccessKey: 'Update this with your secret access key',
-});
+import { PutObjectCommandOutput, S3 } from '@aws-sdk/client-s3';
 
 @Component({
+  standalone: false,
   selector: 'app-root',
   // specifies the template string for the PDF Viewer component
   template: `<div class="content-wrapper">
@@ -53,14 +48,20 @@ export class AppComponent implements OnInit {
     }
   }
 
-  private s3 = new AWS.S3();
+  private s3 = new S3({
+    region: 'update this your region',
+    credentials: {
+      accessKeyId: 'Update this with your access key id',
+      secretAccessKey: 'Update this with your secret access key',
+    }
+  });
 
   loadDocument() {
     const getObjectParams = {
       Bucket: 'Update this with your bucket name',
       Key: 'Update this with your key name',
     };
-    this.s3.getObject(getObjectParams, (err, data) => {
+    this.s3.getObject(getObjectParams, (err: any, data: any) => {
       if (err) {
         console.error('Error fetching document:', err);
       } else {
@@ -91,7 +92,7 @@ export class AppComponent implements OnInit {
           Body: uint8Array,
           ContentType: 'application/pdf',
         };
-        this.s3.putObject(putObjectParams, (err, data) => {
+        this.s3.putObject(putObjectParams, (err: any, data?: PutObjectCommandOutput) => {
           if (err) {
             console.error('Error uploading document:', err);
           } else {
